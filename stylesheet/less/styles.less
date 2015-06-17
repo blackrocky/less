@@ -1,32 +1,52 @@
-@header-font: Georgia;
-h1, h2, h3, h4 {
-    font-family: @header-font; 
-}
-.large {
-    font-family:@header-font;
+@lightRed: #fdd;
+@lightGreen: #dfd;
+@lightBlue: #ddf;
+
+@defaultThemeColor: @lightBlue;
+@defaultRadius: 30px;
+
+@defaultShapesWidth:200px;
+@borderSize:@defaultShapesWidth * 0.1;
+
+.BorderColor(@borderColor:@defaultThemeColor) {
+    border:@borderSize solid @borderColor - #222;
 }
 
-/* Colors for my Website */
-@color-orange: #ff9900;
-@color-gray_light: #cccccc;
-@color-black_dark: #333333;
-@color-black_medium: #454545;
-
-body {
-    background: @color-black_dark;
-    color: @color-black_medium;
-}
-a {
-    color:@color-orange;
-}
-h1, h2, h3, h4, h5, h6 {
-    color: @color-black_dark;
+.shape {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background: @defaultThemeColor;
+    margin: 20px;
 }
 
-@color-button: #d24444;
-input.submit {
-    color:#fff;
-    background:@color-button;
-    border:1px solid @color-button - #222;
-    padding:5px 12px;
+.RoundedShape(@radius:@defaultRadius) {
+    -webkit-border-radius: @radius;
+       -moz-border-radius: @radius;
+            border-radius: @radius;
+}
+
+.Round {
+    .RoundedShape(9999px);
+}
+
+.RoundedSquare(@radius:@defaultRadius) {
+    .RoundedShape(@radius);
+}
+
+#shape1 {
+    .Round;
+    .BorderColor(@lightRed);
+    background: @lightRed;
+}
+
+#shape2 {
+    .RoundedSquare;
+    background: @lightGreen;
+    .BorderColor(@lightGreen);
+}
+
+#shape3 {
+    .RoundedSquare(60px);
+    .BorderColor;
 }
