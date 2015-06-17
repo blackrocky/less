@@ -1,4 +1,4 @@
-// Variables
+/* Variables */
 @lightRed: #fdd;
 @lightGreen: #dfd;
 @lightBlue: #ddf;
@@ -7,11 +7,12 @@
 @defaultRadius: 30px;
 
 @defaultShapesWidth:200px;
-@borderSize:@defaultShapesWidth * 0.1;
+@borderSize:@defaultShapesWidth * 0.1; /* Operation */
+@borderColor:darken(desaturate(@defaultThemeColor, 100%), 20%); /* Colour functions */
 
-// Parametric Mixins
-.BorderColor(@borderColor:@defaultThemeColor) {
-    border:@borderSize solid @borderColor - #222;
+/* Parametric Mixins */
+.BorderColor {
+    border:@borderSize solid @borderColor - #222; /* Operation */
 }
 
 
@@ -21,7 +22,7 @@
             border-radius: @radius;
 }
 
-// Mixins
+/* Mixins */
 .Round {
     .RoundedShape(9999px);
 }
@@ -30,28 +31,29 @@
     .RoundedShape(@radius);
 }
 
-// Usage
+/* Usage */
 .shape {
     display: inline-block;
     width: 200px;
     height: 200px;
     background: @defaultThemeColor;
     margin: 20px;
+    .BorderColor;
+    &:hover{ /* Use & selector and :hover pseudo class */
+        background:@lightRed;
+    }
 }
 
 #shape1 {
     .Round;
-    .BorderColor(@lightRed);
-    background: @lightRed;
+    @spinThemeColor:spin(@lightBlue, 100);
+    background: @spinThemeColor;
 }
 
 #shape2 {
     .RoundedSquare;
-    background: @lightGreen;
-    .BorderColor(@lightGreen);
 }
 
 #shape3 {
     .RoundedSquare(60px);
-    .BorderColor;
 }
